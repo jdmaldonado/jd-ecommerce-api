@@ -34,15 +34,6 @@ const updateCartProduct = async ({ _id, cant }) => {
 	})
 }
 
-const removeCartProduct = async ({ _id, product }) => {
-	return new Promise((resolve, reject) => {
-		CartProduct.findByIdAndRemove({ _id }, (err, product) => {
-			if (err) { reject(err) }
-			resolve(product);
-		})
-	})
-}
-
 const get = async (req, res) => {
 	CartProduct.find({}, (err, products) => {
 		if (err) { handleError(res, err) }
@@ -89,8 +80,20 @@ const removeProduct = async (req, res) => {
 	}
 }
 
+const resetCart = async (req, res) => {
+	try {
+		CartProduct.remove({}, (err, result) => {
+			if (err) { handleError(res, err) }
+			return handleSucess(res, result);
+		})
+	} catch (error) {
+		return handleError(res, error)
+	}
+}
+
 module.exports = {
 	addProduct,
 	removeProduct,
+	resetCart,
 	get
 }

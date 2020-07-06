@@ -7,7 +7,8 @@ const { validateAuthToken } = require('../middlewares/auth.middleware');
 
 router.route('/')
 	.get(validateAuthToken, ShoppingCartController.get)
-	.post(validateAuthToken, ShoppingCartController.addProduct);
+	.post(validateAuthToken, ShoppingCartController.addProduct)
+	.delete(validateAuthToken, ShoppingCartController.resetCart);
 
 router.route('/:productId')
 	.delete(validateAuthToken, ShoppingCartController.removeProduct)
