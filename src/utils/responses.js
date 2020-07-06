@@ -25,8 +25,17 @@ const handleSucess = (res, data) => {
 	});
 }
 
+const handleAccessDenied = (res) => {
+	res.status(403).json({
+		status: 403,
+		success: false,
+		error: 'Access Denied',
+	});
+}
+
 module.exports = {
 	handleError,
   handleBadRequest,
-  handleSucess,
+	handleSucess,
+	handleAccessDenied
 }
